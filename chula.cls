@@ -24,6 +24,7 @@
 %%  - Fix "\normalsize" error. (Ref: http://tex.loria.fr/general/new/clsguide.html)
 %%  - Fix Thai font problem. (Use "TH Sarabun New")
 %%  - Fix polyglossia error on "thaithesis" option.
+%%  - Add a space after author title in English. (but not in Thai)
 %%
 %% May 3, 2012 : Supasate Choochaisri
 %%  - Add a parameter to handle the uppercase of advisor's title except "Ph.D."
@@ -694,7 +695,7 @@
     \thispagestyle{empty}
     \centerline{\begin{tabular}{p{14cm}}\centering\@EnglishTitle\end{tabular}}
     \vfill
-    \centerline{\@EnglishAuthorTitle\@EnglishAuthor}
+    \centerline{\@EnglishAuthorTitle\hspace{0.1cm}\@EnglishAuthor}
     \vfill
     \begin{center}
 A {\if@doctor Dissertation\else Thesis\fi} Submitted in Partial Fulfillment of the Requirements \\
@@ -754,7 +755,7 @@ Copyright of Chulalongkorn University
     \noindent
     \begin{tabular}{p{3cm}p{11cm}}
     Thesis Title            & \@EnglishTitle \\
-    By                      & \@EnglishAuthorTitle\@EnglishAuthor \\
+    By                      & \@EnglishAuthorTitle\hspace{0.1cm}\@EnglishAuthor \\
     Field of Study          & \@EnglishFieldOfStudy \\
     Thesis Advisor          & \@EnglishAdvisor \\
     \if@coadvisor
