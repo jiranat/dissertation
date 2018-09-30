@@ -1,9 +1,12 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%% Author: Supasate Choochaisri
-%% Date:   April 19, 2012
-%% Email:  supasate.c@gmail.com, supasate@larngeartech.com
+%% Author: Jiranat Disayatripong
+%% Date:   September 30, 2018
+%% Email:  jiranat.d@hotmail.com
 %%
-%% This class file is extended from chula.cls by Dr.Nattee Niparnan.
+%% This class file is extended from chula.cls by 
+%% - Dr.Nattee Niparnan
+%% - Supasate Choochaisri.
+%%
 %% The chula.cls by Dr.Nattee is loosely based on the chula.sty package 
 %% originally written by Chatchawit Aporntewan. The chula.sty was 
 %% then undergone many minor changes by Nattee Niparnan, Teerayut 
@@ -17,6 +20,11 @@
 %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Changelog
+%% September 30, 2018: Jiranat Disayatripong
+%%  - Fix "\normalsize" error. (Ref: http://tex.loria.fr/general/new/clsguide.html)
+%%  - Fix Thai font problem. (Use "TH Sarabun New")
+%%  - Fix polyglossia error on "thaithesis" option.
+%%
 %% May 3, 2012 : Supasate Choochaisri
 %%  - Add a parameter to handle the uppercase of advisor's title except "Ph.D."
 %%  - Rename chula_nat.bst to chulanat.bst to make it more compatible to LaTeX 
@@ -44,10 +52,12 @@
 %%  - Change heading mechanism.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Identification %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{chula}[2012/04/19]
+\ProvidesClass{chula}[2018/09/30]
+\renewcommand{\normalsize}{\fontsize{14}{16.8}\selectfont}
+\setlength{\textwidth}{6.5in}
+\setlength{\textheight}{8in}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Initial Code %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \RequirePackage{calc}
@@ -61,13 +71,10 @@
 \RequirePackage{afterpage}
 \RequirePackage{ucharclasses}
 
-\setTransitionTo{Thai}{\fontspec{Garuda}}
+\setTransitionTo{Thai}{\fontspec{TH Sarabun New}}
+\setmainfont[Scale=1]{TH Sarabun New}
+\newfontfamily{\thaifont}{TH Sarabun New}
 
-
-%\newfontfamily\thaifont[BoldFont={Garuda-Bold:script=thai},
-%                 ItalicFont={Garuda-Oblique:script=thai},
-%                 BoldItalicFont={Garuda-BoldOblique:script=thai}
-%                ]{Garuda:script=thai} 
 \setdefaultlanguage{english}
 \setotherlanguage{thai} 
 \XeTeXlinebreaklocale “th_TH” 
@@ -158,6 +165,7 @@
       \def\seename{ดู}%
       \def\alsoname{ดูเพิ่มเติม}%
       \def\proofname{พิสูจน์}%
+      \def\glossaryname{อภิธานศัพท์}%
     }
 \else
   %% my new string
@@ -194,8 +202,6 @@
       \def\alsoname{see also}%
       \def\proofname{Proof}%
       \def\glossaryname{Glossary}%
-      \def\figurename{Figure}
-      \def\tablename{Table}
     }
 \fi
 
@@ -667,7 +673,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \newcommand{\makethaicover}{
-    \fontsize{11}{15}\selectfont
+    \fontsize{16}{19.2}\selectfont
     \thispagestyle{empty}
     \centerline{ \begin{tabular}{p{14cm}}\centering\@ThaiTitle\end{tabular} }
     \vfill
@@ -684,7 +690,7 @@
 }
 
 \newcommand{\makeenglishcover}{
-    \fontsize{11}{15}\selectfont
+    \fontsize{16}{19.2}\selectfont
     \thispagestyle{empty}
     \centerline{\begin{tabular}{p{14cm}}\centering\@EnglishTitle\end{tabular}}
     \vfill
@@ -703,7 +709,7 @@ Copyright of Chulalongkorn University
 
 
 \newcommand{\ThaiCommittee}[1]{
-    \fontsize{11}{13.2}\selectfont
+    \fontsize{14}{16.8}\selectfont
     \thispagestyle{empty}
     \noindent
     
@@ -742,7 +748,7 @@ Copyright of Chulalongkorn University
 }
 
 \newcommand{\EnglishCommittee}{
-    \fontsize{11}{13.2}\selectfont
+    \fontsize{14}{16.8}\selectfont
     \setlength{\textwidth}{16.50cm}
     \thispagestyle{empty}
     \noindent
@@ -815,7 +821,7 @@ Copyright of Chulalongkorn University
 
 %%environment for multiple paragraph page such as abstract and acknowledgement
 \newenvironment{thaiabstract}{
-    \fontsize{11}{15}\selectfont
+    \fontsize{14}{16.8}\selectfont
     \thispagestyle{headings}
     \toccont
     \@ThaiFont
@@ -847,7 +853,7 @@ Copyright of Chulalongkorn University
 
 \newenvironment{englishabstract}{
 %    \selectthesislang
-    \fontsize{11}{15}\selectfont
+    \fontsize{14}{16.8}\selectfont
     \thispagestyle{headings}
     \toccont
     \@ThaiFont
@@ -879,7 +885,7 @@ Copyright of Chulalongkorn University
 
 \newenvironment{acknowledgements}{
 %    \selectthesislang
-    \fontsize{11}{15}
+    \fontsize{14}{16.8}
     \toccont
     \addtocontents{toc}{\protect\vspace*{-0.5cm}}
     \addtocontents{toc}{\protect\contentsline{nchapter}{\bfseries \@AcknowledgementsString}{\@ThaiFont\thepage}}
@@ -890,7 +896,6 @@ Copyright of Chulalongkorn University
     \hfill
     \hspace*{1.0cm}
 }
-
 
 \newenvironment{biography}{
 %    \selectthesislang
